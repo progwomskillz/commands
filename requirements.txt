@@ -1,2 +1,5 @@
 # E-mail
 requests
+# DB
+psycopg2
+sqlalchemy
