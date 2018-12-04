@@ -1,8 +1,8 @@
 import unittest
 
-from commands.write_to_db_command import WriteToDbCommand
-from models.session import Session
-from models.user import User
+from ...commands.write_to_db_command import WriteToDbCommand
+from ...models.session import Session
+from ...models.user import User
 
 
 class WriteToDbCommandTest(unittest.TestCase):
