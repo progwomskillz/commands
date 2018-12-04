@@ -1,7 +1,7 @@
 # E-mail
 requests
 # DB
-psycopg2
+psycopg2-binary
 sqlalchemy
 # RabbitMQ
 pika
