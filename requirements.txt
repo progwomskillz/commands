@@ -3,3 +3,5 @@ requests
 # DB
 psycopg2
 sqlalchemy
+# RabbitMQ
+pika
