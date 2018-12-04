@@ -3,8 +3,8 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from ..exceptions.env_var_not_set import EnvVarNotSet
-from .user import User
+from exceptions.env_var_not_set import EnvVarNotSet
+from models.user import User
 
 
 class Session:

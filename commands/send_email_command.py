@@ -2,8 +2,8 @@ import os
 
 import requests
 
-from .command import Command
-from ..exceptions.env_var_not_set import EnvVarNotSet
+from commands.command import Command
+from exceptions.env_var_not_set import EnvVarNotSet
 
 
 class SendEmailCommand(Command):

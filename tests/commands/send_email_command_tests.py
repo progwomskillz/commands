@@ -1,6 +1,6 @@
 import unittest
 
-from ...commands.send_email_command import SendEmailCommand
+from commands.send_email_command import SendEmailCommand
 
 
 class SendEmailCommandTest(unittest.TestCase):
