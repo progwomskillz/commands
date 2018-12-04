@@ -1,7 +1,7 @@
 import unittest
 
-from models.session import Session
-from models.user import User
+from ...models.session import Session
+from ...models.user import User
 
 
 class SessionTest(unittest.TestCase):

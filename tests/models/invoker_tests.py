@@ -2,9 +2,9 @@ import unittest
 
 from ...models.invoker import Invoker
 from ...commands.write_to_db_command import WriteToDbCommand
-from models.session import Session
-from models.user import User
-from commands.send_email_command import SendEmailCommand
+from ...models.session import Session
+from ...models.user import User
+from ...commands.send_email_command import SendEmailCommand
 
 
 class InvokerTest(unittest.TestCase):
@@ -16,9 +16,8 @@ class InvokerTest(unittest.TestCase):
         write_to_db_command = WriteToDbCommand(session, user)
         commands.append(write_to_db_command)
 
-        from_email = 'MailGun User '
-        from_email += '<postmaster@sandbox594416194b3848e79afe9592cc671be9'
-        from_email += '.mailgun.org>'
+        from_email = 'MailGun User <postmaster@'
+        from_email += 'sandbox594416194b3848e79afe9592cc671be9.mailgun.org>'
         message = {
             'from': from_email,
             'to': 'n.skubak@storytelling-software.com',
