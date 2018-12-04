@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from exceptions.command_cannot_be_undone import CommandCannotBeUndone
+from ..exceptions.command_cannot_be_undone import CommandCannotBeUndone
 
 
 class Command(ABC):
