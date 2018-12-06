@@ -14,15 +14,12 @@ class InvokerTest(unittest.TestCase):
         commands = []
 
         db_service = DBService()
-        returned_user = User(id=10, first_name='Nik', last_name='S.')
-        db_service.save = MagicMock(return_value=returned_user)
-        db_service.delete = MagicMock(return_value=True)
         user = User(first_name='Nik', last_name='S.')
         write_to_db_command = WriteToDbCommand(db_service, user)
+        write_to_db_command.execute = MagicMock(return_value=True)
         commands.append(write_to_db_command)
 
         email_service = EmailService()
-        email_service.send = MagicMock(return_value=True)
         message = {
             'from': 'Nik <admin@example.com',
             'to': 'user@example.com',
@@ -30,6 +27,7 @@ class InvokerTest(unittest.TestCase):
             'message': 'Its worked!'
         }
         send_email_command = SendEmailCommand(email_service, message)
+        send_email_command.execute = MagicMock(return_value=False)
         commands.append(send_email_command)
 
         self.invoker = Invoker(commands)
