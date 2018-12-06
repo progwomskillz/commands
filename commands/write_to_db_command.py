@@ -13,3 +13,4 @@ class WriteToDbCommand(Command):
 
     def undo(self):
         self.db_service.delete(self.object_from_db)
+        return False

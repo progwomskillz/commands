@@ -9,6 +9,9 @@ from models.user import User
 class WriteToDbCommandTest(unittest.TestCase):
     def setUp(self):
         db_service = DBService()
+        returned_user = User(id=10, first_name='Nik', last_name='S.')
+        db_service.save = MagicMock(return_value=returned_user)
+        db_service.delete = MagicMock(return_value=True)
         user = User(first_name='Nik', last_name='S.')
         self.command = WriteToDbCommand(db_service, user)
 
@@ -17,7 +20,8 @@ class WriteToDbCommandTest(unittest.TestCase):
         self.assertTrue(executed)
 
     def test_undo(self):
-        self.command.undo()
+        executed = self.command.undo()
+        self.assertFalse(executed)
 
 
 if __name__ == '__main__':
