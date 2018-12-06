@@ -3,12 +3,14 @@ import os
 
 import pika
 
-from commands.send_email_command import SendEmailCommand
-from commands.write_to_db_command import WriteToDbCommand
 from exceptions.env_var_not_set import EnvVarNotSet
-from models.invoker import Invoker
-from models.db_service import Session
+from exceptions.command_runtime_error import CommandRuntimeError
 from models.user import User
+from models.db_service import DBService
+from commands.write_to_db_command import WriteToDbCommand
+from models.email_service import EmailService
+from commands.send_email_command import SendEmailCommand
+from models.invoker import Invoker
 
 
 class RabbitWrapper:
@@ -31,22 +33,23 @@ class RabbitWrapper:
 
         commands = []
 
-        session = Session()
-        command = WriteToDbCommand(session, user)
+        db_service = DBService()
+        command = WriteToDbCommand(db_service, user)
         commands.append(command)
 
-        command = SendEmailCommand({})
+        email_service = EmailService()
+        message = {}
+        command = SendEmailCommand(email_service, message)
         commands.append(command)
 
         invoker = Invoker(commands)
         try:
             invoker.execute_commands()
             print('OK')
-        except Exception as e:
-            print(e)
-            invoker.undo_commands()
+        except CommandRuntimeError:
+            print('Error')
 
-        session.close_connection()
+        db_service.close_connection()
 
     def __set_vars_from_env(self):
         self.host = self.__get_host_from_env()
