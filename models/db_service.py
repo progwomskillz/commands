@@ -26,6 +26,7 @@ class DBService:
     def delete(self, object_to_delete):
         self.session.delete(object_to_delete)
         self.session.commit()
+        return True
 
     def close_connection(self):
         self.session.close()
