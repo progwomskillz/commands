@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from exceptions.env_var_not_set import EnvVarNotSet
-from models.user import User
 
 
 class Session:
@@ -22,13 +21,10 @@ class Session:
     def add(self, object_to_add):
         self.session.add(object_to_add)
         self.session.commit()
+        return object_to_add
 
     def delete(self, object_to_delete):
-        user = self.session.query(User).filter(
-            User.first_name == object_to_delete.first_name,
-            User.last_name == object_to_delete.last_name
-        ).first()
-        self.session.delete(user)
+        self.session.delete(object_to_delete)
         self.session.commit()
 
     def close_connection(self):

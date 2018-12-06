@@ -10,7 +10,7 @@ class SessionTest(unittest.TestCase):
         self.session = Session()
 
     def test_add(self):
-        self.session.add(self.user)
+        self.user = self.session.add(self.user)
 
     def test_delete(self):
         self.session.delete(self.user)
