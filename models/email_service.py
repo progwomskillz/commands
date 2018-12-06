@@ -11,6 +11,7 @@ class EmailService:
 
     def send(self, message):
         requests.post(self.url, auth=('api', self.token), data=message)
+        return True
 
     def __set_vars_from_env(self):
         self.url = self.__get_url_from_env()
