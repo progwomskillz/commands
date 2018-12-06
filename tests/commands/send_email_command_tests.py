@@ -8,6 +8,7 @@ from models.email_service import EmailService
 class SendEmailCommandTest(unittest.TestCase):
     def setUp(self):
         email_service = EmailService()
+        email_service.send = MagicMock(return_value=True)
         message = {
             'from': 'Nik <admin@example.com',
             'to': 'user@example.com',
@@ -17,7 +18,6 @@ class SendEmailCommandTest(unittest.TestCase):
         self.command = SendEmailCommand(email_service, message)
 
     def test_execute(self):
-        self.command.execute = MagicMock(return_value=False)
         executed = self.command.execute()
         self.assertFalse(executed)
 
