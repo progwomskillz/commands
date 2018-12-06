@@ -1,11 +1,16 @@
 import os
 
+import requests
+
 from exceptions.env_var_not_set import EnvVarNotSet
 
 
 class EmailService:
     def __init__(self):
         self.__set_vars_from_env()
+
+    def send(self, message):
+        requests.post(self.url, auth=('api', self.token), data=message)
 
     def __set_vars_from_env(self):
         self.url = self.__get_url_from_env()
