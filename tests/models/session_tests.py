@@ -1,6 +1,6 @@
 import unittest
 
-from models.session import Session
+from models.db_service import Session
 from models.user import User
 
 

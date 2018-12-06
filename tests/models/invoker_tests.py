@@ -2,7 +2,7 @@ import unittest
 
 from models.invoker import Invoker
 from commands.write_to_db_command import WriteToDbCommand
-from models.session import Session
+from models.db_service import Session
 from models.user import User
 from commands.send_email_command import SendEmailCommand
 

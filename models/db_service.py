@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from exceptions.env_var_not_set import EnvVarNotSet
 
 
-class Session:
+class DBService:
     def __init__(self):
         self.__set_vars_from_env()
 
@@ -18,7 +18,7 @@ class Session:
         session = sessionmaker(bind=self.engine)
         self.session = session()
 
-    def add(self, object_to_add):
+    def save(self, object_to_add):
         self.session.add(object_to_add)
         self.session.commit()
         return object_to_add
