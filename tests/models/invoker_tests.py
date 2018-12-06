@@ -1,9 +1,11 @@
 import unittest
+from unittest.mock import MagicMock
 
 from models.invoker import Invoker
-from commands.write_to_db_command import WriteToDbCommand
-from models.db_service import Session
+from models.db_service import DBService
 from models.user import User
+from commands.write_to_db_command import WriteToDbCommand
+from models.email_service import EmailService
 from commands.send_email_command import SendEmailCommand
 
 
@@ -11,29 +13,30 @@ class InvokerTest(unittest.TestCase):
     def setUp(self):
         commands = []
 
-        session = Session()
-        user = User(first_name='Test', last_name='3')
-        write_to_db_command = WriteToDbCommand(session, user)
+        db_service = DBService()
+        returned_user = User(id=10, first_name='Nik', last_name='S.')
+        db_service.save = MagicMock(return_value=returned_user)
+        db_service.delete = MagicMock(return_value=True)
+        user = User(first_name='Nik', last_name='S.')
+        write_to_db_command = WriteToDbCommand(db_service, user)
         commands.append(write_to_db_command)
 
-        from_email = 'MailGun User <postmaster@'
-        from_email += 'sandbox594416194b3848e79afe9592cc671be9.mailgun.org>'
+        email_service = EmailService()
+        email_service.send = MagicMock(return_value=True)
         message = {
-            'from': from_email,
-            'to': 'n.skubak@storytelling-software.com',
-            'subject': 'MailGun',
-            'text': 'Hello',
+            'from': 'Nik <admin@example.com',
+            'to': 'user@example.com',
+            'subject': 'Test',
+            'message': 'Its worked!'
         }
-        send_email_command = SendEmailCommand(message)
+        send_email_command = SendEmailCommand(email_service, message)
         commands.append(send_email_command)
 
         self.invoker = Invoker(commands)
 
     def test_execute_commands(self):
-        self.invoker.execute_commands()
-
-    def test_undo_commands(self):
-        self.invoker.undo_commands()
+        executed = self.invoker.execute_commands()
+        self.assertTrue(executed)
 
 
 if __name__ == '__main__':

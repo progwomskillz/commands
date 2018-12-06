@@ -21,6 +21,7 @@ class Invoker:
                 self.__undo_commands()
                 message = 'SQL error'
                 raise CommandRuntimeError(message)
+        return True
 
     def __execute_command(self, command):
         if command.execute():
