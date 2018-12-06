@@ -17,9 +17,7 @@ class DBServiceTest(unittest.TestCase):
         returned_user = User(id=10, first_name='Nik', last_name='S.')
         self.db_service.save = MagicMock(return_value=returned_user)
         saved_user = self.db_service.save(user)
-        self.assertEqual(user.first_name, saved_user.first_name)
-        self.assertEqual(user.last_name, saved_user.last_name)
-        self.assertEqual(10, saved_user.id)
+        self.assertEqual(saved_user.__dict__, returned_user.__dict__)
 
     def test_delete(self):
         user = User(id=10, first_name='Nik', last_name='S.')
