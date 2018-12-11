@@ -1,6 +1,6 @@
 import os
 
-from exceptions.env_var_not_set import EnvVarNotSet
+from exceptions.environment.cant_be_import import CantBeImport
 
 
 class EnvironmentSettings:
@@ -8,4 +8,4 @@ class EnvironmentSettings:
         try:
             return os.environ[key]
         except KeyError:
-            raise EnvVarNotSet('Set ' + key + ' environment variable')
+            raise CantBeImport('Set ' + key + ' environment variable')
