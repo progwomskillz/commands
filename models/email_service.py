@@ -1,30 +1,12 @@
-import os
-
 import requests
 
-from exceptions.env_var_not_set import EnvVarNotSet
+from models.environment_settings import EnvironmentSettings
 
 
-class EmailService:
+class EmailService(EnvironmentSettings):
     def __init__(self):
-        self.__set_vars_from_env()
+        self.url = super()._get_var_from_env('EMAIL_URL')
+        self.token = super()._get_var_from_env('EMAIL_TOKEN')
 
     def send(self, message):
         requests.post(self.url, auth=('api', self.token), data=message)
-        return True
-
-    def __set_vars_from_env(self):
-        self.url = self.__get_url_from_env()
-        self.token = self.__get_token_from_env()
-
-    def __get_url_from_env(self):
-        try:
-            return os.environ['EMAIL_URL']
-        except KeyError:
-            raise EnvVarNotSet('Set EMAIL_URL environment variable')
-
-    def __get_token_from_env(self):
-        try:
-            return os.environ['EMAIL_TOKEN']
-        except KeyError:
-            raise EnvVarNotSet('Set EMAIL_TOKEN environment variable')
