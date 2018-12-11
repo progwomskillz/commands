@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from exceptions.command_cannot_be_undone import CommandCannotBeUndone
+from exceptions.commands.cant_be_undone import CantBeUndone
 
 
 class CommandBase(ABC):
@@ -9,4 +9,4 @@ class CommandBase(ABC):
         pass
 
     def undo(self):
-        raise CommandCannotBeUndone('This command cannot be undone')
+        raise CantBeUndone('This command cannot be undone')
