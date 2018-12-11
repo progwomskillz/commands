@@ -1,7 +1,7 @@
-from commands.command import Command
+from commands.command_base import CommandBase
 
 
-class SendEmailCommand(Command):
+class SendEmailCommand(CommandBase):
     def __init__(self, email_service, message):
         self.email_service = email_service
         self.message = message
