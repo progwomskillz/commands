@@ -1,7 +1,7 @@
-from commands.command import Command
+from commands.command_base import CommandBase
 
 
-class WriteToDbCommand(Command):
+class WriteToDbCommand(CommandBase):
     def __init__(self, db_service):
         self.db_service = db_service
 
