@@ -2,10 +2,9 @@ from commands.command_base import CommandBase
 
 
 class SendEmailCommand(CommandBase):
-    def __init__(self, email_service, message):
+    def __init__(self, email_service):
         self.email_service = email_service
-        self.message = message
 
     def execute(self):
-        self.email_service.send(self.message)
+        self.email_service.send()
         return False

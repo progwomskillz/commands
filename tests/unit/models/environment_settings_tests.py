@@ -8,7 +8,8 @@ from exceptions.environment.cant_be_import import CantBeImport
 class EnvironmentSettingsTests(unittest.TestCase):
     def setUp(self):
         self.environment_settings = EnvironmentSettings()
-        self.key, self.value = 'TEST_VARIABLE', 'TEST_STRING'
+        self.key = 'TEST_VARIABLE'
+        self.value = 'TEST_STRING'
 
     def tearDown(self):
         pass

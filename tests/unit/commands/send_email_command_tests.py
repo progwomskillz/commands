@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
+import os
 
 from commands.send_email_command import SendEmailCommand
 from models.services.email_service import EmailService
@@ -7,15 +8,17 @@ from models.services.email_service import EmailService
 
 class SendEmailCommandTests(unittest.TestCase):
     def setUp(self):
-        email_service = EmailService()
-        email_service.send = MagicMock(return_value=True)
         message = {
-            'from': None,
-            'to': None,
-            'subject': None,
-            'message': None
+            'from': 'Admin <admin@example.com>',
+            'to': 'Moder <moder@example.com>',
+            'subject': 'New register',
+            'message': 'New user registered'
         }
-        self.send_email_command = SendEmailCommand(email_service, message)
+        os.environ['EMAIL_URL'] = 'test'
+        os.environ['EMAIL_TOKEN'] = 'test'
+        email_service = EmailService(message)
+        email_service.send = MagicMock(return_value=True)
+        self.send_email_command = SendEmailCommand(email_service)
 
     def tearDown(self):
         pass
