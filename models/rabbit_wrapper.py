@@ -40,15 +40,17 @@ class RabbitWrapper(EnvironmentSettings):
         user_dict = json.loads(body)
         user = User(**user_dict)
 
-        engine = EngineMaker.make_engine()
-        session = SessionMaker.make_session(engine)
+        engine_maker = EngineMaker()
+        engine = engine_maker.make_engine()
+        session_maker = SessionMaker()
+        session = session_maker.make_session(engine)
 
         db_service = DBService(session, user)
         write_to_db_command = WriteToDbCommand(db_service)
 
-        email_service = EmailService()
-        email_message = {}
-        send_email_command = SendEmailCommand(email_service, email_message)
+        mewssage = {}
+        email_service = EmailService(mewssage)
+        send_email_command = SendEmailCommand(email_service)
 
         commands = [write_to_db_command, send_email_command]
 
