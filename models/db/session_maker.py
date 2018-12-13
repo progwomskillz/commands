@@ -2,7 +2,6 @@ from sqlalchemy.orm import sessionmaker
 
 
 class SessionMaker:
-    @staticmethod
-    def make_session(engine):
+    def make_session(self, engine):
         session = sessionmaker(bind=engine)
         return session()
