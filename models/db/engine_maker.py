@@ -4,8 +4,7 @@ from models.environment_settings import EnvironmentSettings
 
 
 class EngineMaker(EnvironmentSettings):
-    @staticmethod
-    def make_engine():
+    def make_engine(self):
         db_login = super()._get_var_from_env('DB_LOGIN')
         db_password = super()._get_var_from_env('DB_PASSWORD')
         db_host = super()._get_var_from_env('DB_HOST')
