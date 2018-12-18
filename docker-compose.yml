@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  queue:
+    container_name: queue
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    image: rabbitmq:management
+  db:
+    container_name: db
+    ports:
+      - "5432:5432"
+    image: postgres:latest

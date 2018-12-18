@@ -6,4 +6,4 @@ sqlalchemy
 # RabbitMQ
 pika
 # Tests
-nose
+pytest
